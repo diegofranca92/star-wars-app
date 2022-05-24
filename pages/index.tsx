@@ -10,25 +10,30 @@ const Home: NextPage = () => {
   const signNotification = React.useCallback(
     async (e: FormEvent) => {
       e.preventDefault()
-      setIsSaving(true)
-      const { data, error, status }: any = await supabase
-        .from('usuarios')
-        .insert([{ email }], { returning: 'minimal' })
-      if (error) {
-        if (status === 409) {
-          alert('Usuário já cadastrado, Tente com outro email')
-        } else {
-          alert('Erro ao cadastrar usuário')
-        }
-        console.log(error)
-        setIsSaving(false)
-        return
-      }
+      const { user, session, error } = await supabase.auth.signIn({
+        provider: 'facebook'
+      })
 
-      alert('Usuário cadastrado com sucesso')
+      console.log('user', user, 'session', session, 'error', error)
+      // setIsSaving(true)
+      // const { data, error, status }: any = await supabase
+      //   .from('usuarios')
+      //   .insert([{ email }], { returning: 'minimal' })
+      // if (error) {
+      //   if (status === 409) {
+      //     alert('Usuário já cadastrado, Tente com outro email')
+      //   } else {
+      //     alert('Erro ao cadastrar usuário')
+      //   }
+      //   console.log(error)
+      //   setIsSaving(false)
+      //   return
+      // }
 
-      console.log(data)
-      setIsSaving(false)
+      // alert('Usuário cadastrado com sucesso')
+
+      // console.log(data)
+      // setIsSaving(false)
       setEmail('')
     },
     [email]

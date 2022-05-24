@@ -28,7 +28,7 @@ export async function getStaticProps(context: any) {
   }
 }
 
-async function getPeoples() {
+export async function getPeoples() {
   const response = await fetch(`${urlAPI}/people`)
   const { results } = await response.json()
   return results
