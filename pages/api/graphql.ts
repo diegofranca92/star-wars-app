@@ -4,21 +4,23 @@ import { getPeoples } from '../peoples/[id]'
 const typeDefs = /* GraphQL */ `
   type Query {
     users: [User!]!,
-    # peoples: [People!]!,
+    peoples: [People],
   }
   type User {
     name: String
   }
-  # type People {
-  #   name: String
-  # }
+  type People {
+    name: String,
+    films: [String],
+    starships: [String],
+  }
 `
 
 const resolvers = {
   Query: {
-    // stars() {
-    //   return getPeoples()
-    // },
+    peoples() {
+      return getPeoples()
+    },
     users() {
       return [{ name: 'Nextjs' }]
     },
