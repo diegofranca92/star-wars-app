@@ -40,17 +40,24 @@ const Home: NextPage = () => {
   )
   return (
     <>
-      <form onSubmit={signNotification} style={{ textAlign: 'center' }}>
-        <p>Seja notificado para o lançamento do App</p>
+      <form
+        className='rounded-md bg-blue-500 w-full p-5 h-72 mx-auto flex flex-col items-center justify-center'
+        onSubmit={signNotification}
+        style={{ textAlign: 'center' }}>
+        <h3 className='text-2xl font-bold mb-3'>
+          Seja notificado para o lançamento do App
+        </h3>
         {email}
         <input
           type='email'
+          className='w-full p-2 border-2 border-blue-500 mb-3 rounded-md'
           value={email}
           onChange={event => setEmail(event.target.value)}
           placeholder='Insira seu email'
         />
         <button
           type='submit'
+          className='bg-sky-700 hover:bg-sky-800 text-white font-bold py-2 px-4 rounded-md'
           style={{ pointerEvents: isSaving ? 'none' : 'all' }}>
           Inscrever
         </button>

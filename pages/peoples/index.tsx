@@ -9,10 +9,10 @@ const Peoples: NextPage = ({ peoples }: any) => {
 
   return (
     <>
-      <ul>
+      <ul className='flex justify-between gap-2'>
         {peoples.map((people: any, index: number) => (
           <Link key={index} href={`/peoples/${index + 1}`}>
-            <li>
+            <li className='bg-white p-3 mb-3 cursor-pointer hover:bg-slate-700 hover:text-white'>
               <a>{people.name}</a>
             </li>
           </Link>
