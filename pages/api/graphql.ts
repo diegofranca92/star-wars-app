@@ -1,31 +1,37 @@
-import { ApolloServer, gql } from "apollo-server-micro";
+import { createServer } from '@graphql-yoga/node'
+import { getPeoples } from '../peoples/[id]'
 
-
-const typeDefs = gql`
+const typeDefs = /* GraphQL */ `
   type Query {
-    sayHello: String
+    users: [User!]!,
+    # peoples: [People!]!,
   }
-`;
+  type User {
+    name: String
+  }
+  # type People {
+  #   name: String
+  # }
+`
 
 const resolvers = {
   Query: {
-    sayHello() {
-      return 'Hello World!';
+    // stars() {
+    //   return getPeoples()
+    // },
+    users() {
+      return [{ name: 'Nextjs' }]
     },
   },
-};
+}
 
-const server = new ApolloServer({
-  typeDefs, resolvers,
+const server = createServer({
+  schema: {
+    typeDefs,
+    resolvers,
+  },
+  endpoint: '/api/graphql',
+  // graphiql: false // uncomment to disable GraphiQL
 })
 
-export const config = {
-  bodyParser: false,
-}
-
-const startServer = server.start()
-
-export default async function handler(req:any, res:any) {
-  await startServer
-  await server.createHandler({ path: "/api/graphql" })(req, res)
-}
+export default server
