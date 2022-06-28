@@ -3,17 +3,12 @@ import React from 'react'
 import Image from 'next/image'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
-const Dash: NextPage = ({ launches }: any) => {
-  
-  console.log('launches', launches);
-  
+const Dash: NextPage = ({ launches }: any) => {  
 
   return (
     <main className="w-full p-5 h-72">
-      <header>
-        <h1 className="text-2xl font-bold mb-3">List of Launches</h1>
-      </header>
       <div className='flex gap-2 flex-col'>
+        <h1 className="text-2xl font-bold mb-10 text-center uppercase border-dashed w-50 mx-auto border-b-4 border-sky-500">List of Launches</h1>
         { launches.map( (launch:any) => (
           <a key={ launch.id } href={launch.links.video_link}  className='bg-white p-3 mb-3 cursor-pointer hover:bg-slate-700 hover:text-white'>
             <b>{launch.mission_name}</b>
